@@ -194,6 +194,10 @@ person.email = 'john@gmail.com';
 console.dir(person);
 console.log(person.firstName);
 
+// clone an object // ! only goes one level deep
+const personClone1 = Object.assign({ }, person);
+const personClone2 = { ...person }; // spread operator
+
 // destructuring AKA unpacking
 const { fName, lName, address: { city } } = person;
 
@@ -328,15 +332,26 @@ for (let pet of pets) {
 
 // * functions
 
-// pure function - does not use external data
-function addNums (num1 = 1, num2 = 1) {
+// declaration
+function addNums (num1 = 1, num2 = 1) { // pure function - does not use external data
   return num1 + num2;
 }
-
-console.log(`result: ${addNums()}`);
 console.log(`result: ${addNums(6, 4)}`);
+console.log(`result: ${addNums()}`); // parameterless (uses default values)
 
-// arrow functions
+// immediately invoked function expression
+(function sayCheese () {
+  console.log('cheese');
+})();
+
+// workaround for named params by using an object
+function makeLunch (opts) {
+  const { main, side, drink } = opts;
+  console.log(`Lunch includes ${main}, ${side}, and ${drink}.`);
+}
+makeLunch({ main: 'wrap', side: 'chips', drink: 'tea'});
+
+// arrow functions (expression)
 const multiplyNums = (num1 = 1, num2 = 1) => num1 * num2;
 
 console.log(`result: ${multiplyNums(2, 5)}`);
@@ -508,6 +523,43 @@ console.log(num);
 console.log(obj1.item);
 console.log(obj2.item);
 
+// * this
+// current execution context: the global environment or an object 
+const someObject = {
+  someProperty: '😆'
+}
+function hello() {
+  return this.someProperty;
+}
+// const result = hello(); // ! bound to the global object which doesn't have the property
+const functionResult = hello.call(someObject); // instead, pass an object that has the property
+console.log(functionResult);
+
+function whatIsThis() {
+  console.log(this);
+}
+const anotherObject = {
+  someProperty: '😂',
+  whatIsThis
+}
+const yetAnotherObject = {
+  someProperty: '😌'
+}
+whatIsThis(); // global
+anotherObject.whatIsThis(); // points to anotherObject
+const whyIsThis = whatIsThis.bind(yetAnotherObject); // new function that points to yetAnotherObject
+whyIsThis();
+
+// method chaining
+function Chain() {
+  this.chainMe = function () {
+    console.log('chaining...');
+    return this;
+  }
+}
+const chainObject = new Chain();
+chainObject.chainMe().chainMe().chainMe();
+
 
 // * object oriented
 
@@ -599,4 +651,4 @@ seniorEmployee1.sayGoodbye();
 console.dir(seniorEmployee1);
 console.log('seniorEmployee1 name:', seniorEmployee1.fullName);
 
-// debugger; // * this statement will create a breakpoint in a browser debugger
+// debugger; // * creates a breakpoint in a browser debugger
