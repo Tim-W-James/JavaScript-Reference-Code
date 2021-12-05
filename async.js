@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 // * promise
 
 // create
@@ -44,6 +46,15 @@ const codeBlocker = () => {
   })
 }
 codeBlocker().then(console.log);
+
+// promise.all
+const promise1 = Promise.resolve('Hello world');
+const promise2 = 10;
+const promise3 = new Promise((resolve, reject) =>
+  setTimeout(resolve, 2000, 'Goodbye')
+);
+const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+Promise.all([promise1, promise2, promise3, promise4]).then(console.log);
 
 
 // * async
@@ -123,18 +134,3 @@ const nameLoop = async() => {
   }
 }
 nameLoop();
-
-// * fetch
-
-// import fetch from 'node-fetch';
-
-// // promise
-// const promise = fetch('https://jsonplaceholder.typicode.com/todos/1');
-
-// // chain callbacks
-// promise
-//   .then(res => res.json())
-//   .then(user => console.log(user.title))
-//   .catch(err => console.log(err)); // catch an error in any of the callbacks
-
-// console.log('sync')
