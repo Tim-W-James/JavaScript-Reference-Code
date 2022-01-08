@@ -19,25 +19,25 @@ const pi = 3.14;
 // with let, each localVariable is only visible in its respective block (aka Lexical env)
 {
   let localVariable = 5;
-  console.log('localVariable:', localVariable);
+  console.log("localVariable:", localVariable);
 }
 {
   let localVariable = 7;
-  console.log('localVariable:', localVariable);
+  console.log("localVariable:", localVariable);
 }
 // with var, globalVariable is hoisted to global scope
 {
   var globalVariable = 12;
 }
-console.log('globalVariable:', globalVariable);
+console.log("globalVariable:", globalVariable);
 
 // * data types
 
 // String
-const genericName = 'John';
+const genericName = "John";
 // escape characters
-const newLine = 'first line\nsecond line';
-const quote = '\'quote\'';
+const newLine = "first line\nsecond line";
+const quote = "'quote'";
 // template string
 const templateStr = `name: ${genericName}`;
 
@@ -57,29 +57,30 @@ let z;
 
 // dynamic typing
 let something = 5;
-something = 'hello!';
+something = "hello!";
 
 // get type
-console.log('type of age:', typeof age);
-
+console.log("type of age:", typeof age);
 
 // * String properties and methods
 
-const s = 'Hello world';
+const s = "Hello world";
 
 console.log(s.length);
 console.log(s.toUpperCase());
 console.log(s.toLowerCase());
 console.log(s.substring(0, 5));
-console.log(s.split(' '));
+console.log(s.split(" "));
 
 // ASCII
-const character = 'A';
+const character = "A";
 // convert to ASCII
 let asciiValue = character.charCodeAt(0);
 asciiValue++; // add 1 to A and get B
 // convert back to String
-console.log(`ASCII code for ${String.fromCharCode(asciiValue)} is ${asciiValue}`);
+console.log(
+  `ASCII code for ${String.fromCharCode(asciiValue)} is ${asciiValue}`
+);
 
 // * Math and Random
 
@@ -92,41 +93,40 @@ let twoDecimalPlaces = lotsOfDecimal.toFixed(2);
 console.log(twoDecimalPlaces);
 
 // string to number
-const myNumberString = '74';
+const myNumberString = "74";
 const myNumber = Number(myNumberString);
 console.log(myNumber + 6);
 
 // random numbers
-console.log('random number:', Math.random()); // between 0 and 1
-function getRandomInt(min, max) { // random number between min (included) and max (excluded)
+console.log("random number:", Math.random()); // between 0 and 1
+function getRandomInt(min, max) {
+  // random number between min (included) and max (excluded)
   return Math.floor(Math.random() * (max - min)) + min;
 }
-console.log('random number:', getRandomInt(5, 2)); // 2, 3, or 4
-
+console.log("random number:", getRandomInt(5, 2)); // 2, 3, or 4
 
 // * Arrays
 
-const someNumbers = new Array(1,2,3,4,5);
-const fruits  = ['apple', 'orange', 'pear'];
-const stuff   = ['car', 15, true];
+const someNumbers = new Array(1, 2, 3, 4, 5);
+const fruits = ["apple", "orange", "pear"];
+const stuff = ["car", 15, true];
 
-fruits[0] = 'banana';         // update
-fruits[3] = 'mango';          // add to end by index
-fruits.push('pineapple');     // add to end
-fruits.unshift('strawberry'); // add to start
-fruits.pop();                 // remove last value
+fruits[0] = "banana"; // update
+fruits[3] = "mango"; // add to end by index
+fruits.push("pineapple"); // add to end
+fruits.unshift("strawberry"); // add to start
+fruits.pop(); // remove last value
 
 console.table(fruits);
-console.log('first fruit:', fruits[0]);
+console.log("first fruit:", fruits[0]);
 console.log(Array.isArray(fruits));
-console.log(fruits.indexOf('orange'));
-console.log(fruits.some(v => v === 'pear'));
+console.log(fruits.indexOf("orange"));
+console.log(fruits.some((v) => v === "pear"));
 
 // arrays are reference types (use spread operator instead)
 const someOtherNumbers = someNumbers;
 someOtherNumbers.push(6);
 console.log(someNumbers); // ! updating the new array also updates the original
-
 
 // * spread operator
 
@@ -149,15 +149,15 @@ const numbers4 = [...numbers1]; // ! only goes one level deep for nested arrays
 // useful for immutability - we can keep the original of a parameter and instead update a copy
 // ! use for react
 const todos = [
-  {user: 'Bob', completed: false, task: 'Upload File'},
-  {user: 'Pam', completed: true, task: 'Send Email'}
-]
+  { user: "Bob", completed: false, task: "Upload File" },
+  { user: "Pam", completed: true, task: "Send Email" },
+];
 
-function addTodo (newTodo) {
-  return [...todos, {...newTodo, completed: false}];
+function addTodo(newTodo) {
+  return [...todos, { ...newTodo, completed: false }];
 }
 
-const newTodos = addTodo({user: 'Jack', task: 'Upload Video'})
+const newTodos = addTodo({ user: "Jack", task: "Upload Video" });
 console.log(todos); // original is not mutated
 console.log(newTodos);
 
@@ -174,37 +174,39 @@ function sumAll(...args) {
 console.log(sumAll(1)); // 1
 console.log(sumAll(1, 2, 3)); // 6
 
-
 // * object literals
 
 const person = {
-  firstName: 'John',
-  lastName:  'Doe',
-  age:       30,
-  hobbies:   ['music', 'tv', 'hiking'],
-  address:   {
-    street: '50 main st',
-    city:   'Canberra',
-    state:  'ACT'
-  }
-}
+  firstName: "John",
+  lastName: "Doe",
+  age: 30,
+  hobbies: ["music", "tv", "hiking"],
+  address: {
+    street: "50 main st",
+    city: "Canberra",
+    state: "ACT",
+  },
+};
 
-person.email = 'john@gmail.com';
+person.email = "john@gmail.com";
 
 console.dir(person);
 console.log(person.firstName);
 
 // clone an object // ! only goes one level deep
-const personClone1 = Object.assign({ }, person);
+const personClone1 = Object.assign({}, person);
 const personClone2 = { ...person }; // spread operator
 
 // destructuring AKA unpacking
-const { fName, lName, address: { city } } = person;
+const {
+  fName,
+  lName,
+  address: { city },
+} = person;
 
 // JSON
 const personJSON = JSON.stringify(person);
 console.log(personJSON);
-
 
 // * selection & conditionals
 
@@ -212,64 +214,60 @@ const valueA = 10;
 
 // if
 if (valueA == 10) {
-  console.log('valueA is 10');
+  console.log("valueA is 10");
 }
 
 // if-else
 if (valueA == 10) {
-  console.log('valueA is 10');
-}
-else {
-  console.log('valueA is not 10');
+  console.log("valueA is 10");
+} else {
+  console.log("valueA is not 10");
 }
 
 // if-else-if-else
 if (valueA == 10) {
-  console.log('valueA is equal to 10');
-}
-else if (valueA > 10) {
-  console.log('valueA is greater than 10');
-}
-else {
-  console.log('valueA is less than 10');
+  console.log("valueA is equal to 10");
+} else if (valueA > 10) {
+  console.log("valueA is greater than 10");
+} else {
+  console.log("valueA is less than 10");
 }
 
 // switch
 switch (valueA) {
   case 1:
-    console.log('valueA is 1');
+    console.log("valueA is 1");
     break;
   case 5:
-    console.log('valueA is 5');
+    console.log("valueA is 5");
     break;
   case 10:
-    console.log('valueA is 10');
+    console.log("valueA is 10");
     break;
   default:
-    console.log('valueA is not 1, 5, or 10');
+    console.log("valueA is not 1, 5, or 10");
     break;
 }
 
 // ternary operator
-const isAGreaterThan5 = valueA > 5 ? true : false; 
-console.log('isAGreaterThan5:', isAGreaterThan5);
+const isAGreaterThan5 = valueA > 5 ? true : false;
+console.log("isAGreaterThan5:", isAGreaterThan5);
 
 // or conditional
 if (valueA == 10 || valueA == 5) {
-  console.log('valueA is equal to 10 or 5');
+  console.log("valueA is equal to 10 or 5");
 }
 
 // and conditional
 if (valueA > 5 && valueA < 15) {
-  console.log('valueA is between 5 and 15 (exclusive)');
+  console.log("valueA is between 5 and 15 (exclusive)");
 }
 
 // match by data type
-const valueB = '10';
+const valueB = "10";
 if (valueB === 10) {
-  console.log('valueX is 10');
+  console.log("valueX is 10");
 }
-
 
 // * iteration
 
@@ -285,13 +283,13 @@ while (index < 10) {
   index++;
 }
 
-const pets = ['cat', 'dog', 'fish'];
+const pets = ["cat", "dog", "fish"];
 
 // for of loop - for iterables
 for (let pet of pets) {
-  console.log('for of - pet:', pet);
+  console.log("for of - pet:", pet);
 }
-const cat = {name: 'Max', breed: 'Grey Tabby', age: 3};
+const cat = { name: "Max", breed: "Grey Tabby", age: 3 };
 // turn an object into an iterable
 for (const v of Object.values(cat)) {
   console.log(v);
@@ -304,52 +302,51 @@ for (const key in cat) {
 
 // break
 for (let pet of pets) {
-  console.log('break - pet:', pet);
-  if (pet == 'dog') {
+  console.log("break - pet:", pet);
+  if (pet == "dog") {
     break; // jump out of loop
   }
 }
 
 // continue
 for (let pet of pets) {
-  if (pet == 'dog') {
+  if (pet == "dog") {
     continue; // jump out of an iteration
   }
-  console.log('continue - pet:', pet);
+  console.log("continue - pet:", pet);
 }
 
 // labels
-loop1:
-for (let pet of pets) {
-  if (pet == 'dog') {
+loop1: for (let pet of pets) {
+  if (pet == "dog") {
     // allows breaks or continues to target a specific block or loop
     // useful for nested loops
     continue loop1;
   }
-  console.log('labels - pet:', pet);
+  console.log("labels - pet:", pet);
 }
-
 
 // * functions
 
 // declaration
-function addNums (num1 = 1, num2 = 1) { // pure function - does not use external data
+function addNums(num1 = 1, num2 = 1) {
+  // pure function - does not use external data
   return num1 + num2;
 }
 console.log(`result: ${addNums(6, 4)}`);
 console.log(`result: ${addNums()}`); // parameterless (uses default values)
 
 // immediately invoked function expression
-(function sayCheese () {
-  console.log('cheese');
+(function sayCheese() {
+  console.log("cheese");
 })();
 
 // workaround for named params by using an object
-function makeLunch (opts) {
+function makeLunch(opts) {
   const { main, side, drink } = opts;
   console.log(`Lunch includes ${main}, ${side}, and ${drink}.`);
 }
-makeLunch({ main: 'wrap', side: 'chips', drink: 'tea'});
+makeLunch({ main: "wrap", side: "chips", drink: "tea" });
 
 // arrow functions (expression)
 const multiplyNums = (num1 = 1, num2 = 1) => num1 * num2;
@@ -357,8 +354,8 @@ const multiplyNums = (num1 = 1, num2 = 1) => num1 * num2;
 console.log(`result: ${multiplyNums(2, 5)}`);
 
 // first class functions - treated as objects and can be used as arguments
-function printResult (f, num1, num2) {
-  console.log('function result:', f(num1, num2));
+function printResult(f, num1, num2) {
+  console.log("function result:", f(num1, num2));
 }
 printResult(multiplyNums, 2, 6);
 
@@ -366,13 +363,13 @@ printResult(multiplyNums, 2, 6);
 // combination of the Lexical Environment and function body
 let b = 3;
 // impure function
-function impureFunction (a) {
+function impureFunction(a) {
   // references data outside of its scope, which creates a closure
   // in this case, the closure covers the global Lexical Environment and this function block
   return a + b;
 }
 function outer() {
-  let state = 'something';
+  let state = "something";
   // inner function has access here
   function inner() {
     // outer function does not have access here
@@ -382,11 +379,12 @@ function outer() {
 }
 
 // currying
-const subtractNums = (num1) => { // function factory
+const subtractNums = (num1) => {
+  // function factory
   return (num2) => {
     return num1 - num2;
-  }
-} 
+  };
+};
 const subtractFrom5 = subtractNums(5);
 const subtractFrom10 = subtractNums(10);
 // in the Lexical environment of subtractFrom5, num1 is 5
@@ -394,18 +392,17 @@ const subtractFrom10 = subtractNums(10);
 // though both functions have different Lexical environments, they share the same function body
 console.log(`result: ${subtractFrom5(2)}`);
 
-
 // * recursion
 
 // factorial
 function factorial(num) {
   // base case
   if (num === 1) {
-      return 1;
+    return 1;
   }
   // recursive / step case
   else {
-      return num * factorial(num - 1); // recursive call
+    return num * factorial(num - 1); // recursive call
   }
 }
 console.log(`The factorial of ${5} is ${factorial(5)}`);
@@ -421,10 +418,10 @@ Step 6: 5 * 4 * 3 * 2 * 1;
 
 // tail-end recursion is better optimized
 function tailRecursiveFactorial(number, result = 1) {
-  if(number === 1) {
-      return result;
+  if (number === 1) {
+    return result;
   } else {
-      return tailRecursiveFactorial(number - 1, result * number);
+    return tailRecursiveFactorial(number - 1, result * number);
   }
 }
 /* now the factorial of 5 is evaluated as follows:
@@ -437,85 +434,94 @@ fewer operations and fewer items on the stack */
 
 // fibonacci
 function fibonacci(num) {
-  if(num < 2) {
-      return num;
-  }
-  else {
-      return fibonacci(num-1) + fibonacci(num - 2);
+  if (num < 2) {
+    return num;
+  } else {
+    return fibonacci(num - 1) + fibonacci(num - 2);
   }
 }
 console.log(`The fibonacci of ${6} is ${fibonacci(6)}`);
-
 
 // * higher order functions
 
 const countries = ["Australia", "America", "Japan"];
 
 // forEach
-countries.forEach(function(country) {
-  console.log('country:', country);
+countries.forEach(function (country) {
+  console.log("country:", country);
 });
 // form: current, currentIndex, entireArray
-countries.forEach(function(country, index, countries) {
-  console.log('country:', country, ", index:", index, ", countries:", countries);
+countries.forEach(function (country, index, countries) {
+  console.log(
+    "country:",
+    country,
+    ", index:",
+    index,
+    ", countries:",
+    countries
+  );
 });
 
 // map
-const countryLengths = countries.map(function(country) {
+const countryLengths = countries.map(function (country) {
   return country.length;
 });
-console.log('countryLengths:', countryLengths);
+console.log("countryLengths:", countryLengths);
 
 // filter
-const countriesStartingWithA = countries.filter(function(country) {
-  return country.charAt(0) == 'A';
+const countriesStartingWithA = countries.filter(function (country) {
+  return country.charAt(0) == "A";
 });
 // via arrow function (alternative)
-const countriesStartingWithJ = countries.filter(country => country.charAt(0) == 'J');
-console.log('countriesStartingWithA:', countriesStartingWithA);
-console.log('countriesStartingWithJ:', countriesStartingWithJ);
+const countriesStartingWithJ = countries.filter(
+  (country) => country.charAt(0) == "J"
+);
+console.log("countriesStartingWithA:", countriesStartingWithA);
+console.log("countriesStartingWithJ:", countriesStartingWithJ);
 
 // sort
 const unsortedNumbers = [8, 4, 3, 12, 9];
 const sorted = unsortedNumbers.sort(); // ! only checks first digit of each value
-console.log('sorted:', sorted);
-const sortedDescending = unsortedNumbers.sort(function(number1, number2) {
+console.log("sorted:", sorted);
+const sortedDescending = unsortedNumbers.sort(function (number1, number2) {
   if (number1 < number2) {
     return 1;
-  }
-  else {
+  } else {
     return -1;
   }
 });
-console.log('sortedDescending:', sortedDescending);
+console.log("sortedDescending:", sortedDescending);
 // via arrow function and ternary (alternative)
-const sortedAscending = unsortedNumbers.sort((number1, number2) => (number1 > number2 ? 1 : -1));
-console.log('sortedAscending:', sortedAscending);
+const sortedAscending = unsortedNumbers.sort((number1, number2) =>
+  number1 > number2 ? 1 : -1
+);
+console.log("sortedAscending:", sortedAscending);
 
 // reduce AKA fold
 const arrayOfNumbers = [17, 3, 6, 13, 8];
 // form: (accumulator, current, currentIndex, entireArray) => function, initialValue
 const numbersSum = arrayOfNumbers.reduce((total, number) => total + number, 0);
-console.log('numbersSum:', numbersSum);
+console.log("numbersSum:", numbersSum);
 // if order matters, can be done in reverse instead
-const numbersSubtract = arrayOfNumbers.reduceRight((total, number) => total + number, 0);
-
+const numbersSubtract = arrayOfNumbers.reduceRight(
+  (total, number) => total + number,
+  0
+);
 
 // * pass-by-reference vs pass-by-value
 
-function changeStuff(a, b, c)
-{
+function changeStuff(a, b, c) {
   // primitives are pass-by-value so will not propagate changes
   a = a * 10;
   // object internals are pass-by-reference so will propagate changes
   b.item = "changed";
   // objects themselves are pass-by-value so will not propagate changes
-  c = {item: "changed"};
+  c = { item: "changed" };
 }
 
 let num = 10;
-let obj1 = {item: "unchanged"};
-let obj2 = {item: "unchanged"};
+let obj1 = { item: "unchanged" };
+let obj2 = { item: "unchanged" };
 
 changeStuff(num, obj1, obj2);
 
@@ -524,10 +530,10 @@ console.log(obj1.item);
 console.log(obj2.item);
 
 // * this
-// current execution context: the global environment or an object 
+// current execution context: the global environment or an object
 const someObject = {
-  someProperty: '😆'
-}
+  someProperty: "😆",
+};
 function hello() {
   return this.someProperty;
 }
@@ -539,12 +545,12 @@ function whatIsThis() {
   console.log(this);
 }
 const anotherObject = {
-  someProperty: '😂',
-  whatIsThis
-}
+  someProperty: "😂",
+  whatIsThis,
+};
 const yetAnotherObject = {
-  someProperty: '😌'
-}
+  someProperty: "😌",
+};
 whatIsThis(); // global
 anotherObject.whatIsThis(); // points to anotherObject
 const whyIsThis = whatIsThis.bind(yetAnotherObject); // new function that points to yetAnotherObject
@@ -553,18 +559,17 @@ whyIsThis();
 // method chaining
 function Chain() {
   this.chainMe = function () {
-    console.log('chaining...');
+    console.log("chaining...");
     return this;
-  }
+  };
 }
 const chainObject = new Chain();
 chainObject.chainMe().chainMe().chainMe();
 
-
 // * object oriented
 
 // constructor
-function Student (firstName, lastName, dob) {
+function Student(firstName, lastName, dob) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.dob = new Date(dob);
@@ -572,23 +577,23 @@ function Student (firstName, lastName, dob) {
   // method
   this.getBirthYear = function () {
     return this.dob.getFullYear();
-  }
+  };
 }
 // method by prototype (alternative)
 Student.prototype.getFullName = function () {
-  return `${this.firstName} ${this.lastName}`
-}
+  return `${this.firstName} ${this.lastName}`;
+};
 
 // instantiation
-const student1 = new Student('Tim', 'J', '1-5-2001');
+const student1 = new Student("Tim", "J", "1-5-2001");
 
 console.dir(student1);
-console.log('student1 year of birth:', student1.getBirthYear());
-console.log('student1 name:', student1.getFullName());
+console.log("student1 year of birth:", student1.getBirthYear());
+console.log("student1 name:", student1.getFullName());
 
 // class (alternative)
 class Employee {
-  constructor (firstName, lastName, company, salary = 0) {
+  constructor(firstName, lastName, company, salary = 0) {
     this.firstName = firstName;
     this.lastName = lastName;
     // use _ so that name doesn't conflict with getter and setter
@@ -598,57 +603,59 @@ class Employee {
   }
 
   // getter
-  get company () {
+  get company() {
     return this._company;
   }
 
   // setter
-  set company (newCompany) {
+  set company(newCompany) {
     this._company = newCompany;
   }
-  
-  sayHello () {
+
+  sayHello() {
     console.log(`Hello ${this.firstName}.`);
   }
 
   // methods can be getters so they can be called like properties
-  get fullName () {
+  get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 }
 
-const employee1 = new Employee('John', 'Doe', 'Google');
-employee1.company = 'Amazon'; // calls a setter
+const employee1 = new Employee("John", "Doe", "Google");
+employee1.company = "Amazon"; // calls a setter
 employee1.sayHello();
 
 console.dir(employee1);
-console.log()
-console.log('employee1 name:', employee1.fullName); // calls a getter
+console.log();
+console.log("employee1 name:", employee1.fullName); // calls a getter
 
 // inheritance
 class SeniorEmployee extends Employee {
-  constructor (firstName, lastName, company, yearsWorked) {
+  constructor(firstName, lastName, company, yearsWorked) {
     // call the parent constructor
     super(firstName, lastName, company);
     this.yearsWorked = yearsWorked;
   }
 
   // add new method
-  sayGoodbye () {
+  sayGoodbye() {
     console.log(`Goodbye ${this.firstName}.`);
   }
 
   // override method
-  sayHello () {
-    console.log(`Hello ${this.firstName}. You've been here ${this.yearsWorked} years!`);
+  sayHello() {
+    console.log(
+      `Hello ${this.firstName}. You've been here ${this.yearsWorked} years!`
+    );
   }
 }
 
-const seniorEmployee1 = new SeniorEmployee('Jerry', 'Jones', 'Facebook', 9);
+const seniorEmployee1 = new SeniorEmployee("Jerry", "Jones", "Facebook", 9);
 seniorEmployee1.sayHello();
 seniorEmployee1.sayGoodbye();
 
 console.dir(seniorEmployee1);
-console.log('seniorEmployee1 name:', seniorEmployee1.fullName);
+console.log("seniorEmployee1 name:", seniorEmployee1.fullName);
 
 // debugger; // * creates a breakpoint in a browser debugger

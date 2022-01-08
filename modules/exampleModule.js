@@ -1,7 +1,7 @@
 // default export
 export default () => {
-  alert('Hello World!');
-}
+  alert("Hello World!");
+};
 
 // named export
 export function sayHi(user) {
@@ -9,10 +9,7 @@ export function sayHi(user) {
 }
 
 const favNum = 23;
-const favColour = 'blue';
+const favColour = "blue";
 
 // multiple named export
-export {
-  favNum,
-  favColour
-}
+export { favNum, favColour };
